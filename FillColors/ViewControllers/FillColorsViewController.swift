@@ -88,7 +88,7 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         blueSlider.value = Float(currentColorInitialView.blueValue)
     }
     
-    private func textFieldValueToSlider(_ textField: UITextField) {
+    private func getTextFieldValueToSlider(_ textField: UITextField) {
         guard
             let textFieldValueToString = textField.text
         else { return }
@@ -135,7 +135,7 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        textFieldValueToSlider(textField)
+        getTextFieldValueToSlider(textField)
         textField.resignFirstResponder()
         updatefillingColorView()
         updateLabels()

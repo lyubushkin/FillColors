@@ -41,14 +41,12 @@ class InitialViewController: UIViewController {
         let sourceViewController =
             unwindSegue.source as? FillColorsViewController
         currentColorInitialView =
-            sourceViewController?.fillingColorView.backgroundColor ?? .red
+            sourceViewController?.fillingColorView.backgroundColor ?? .white
     }
     
     @IBAction func goToSecond() {
         performSegue(withIdentifier: "toSecondGegue", sender: "nil")
     }
-    
-    
 }
 
 extension InitialViewController: InitialViewControllerDelegate {
