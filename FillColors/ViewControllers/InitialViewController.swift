@@ -8,6 +8,9 @@
 import UIKit
 
 protocol InitialViewControllerDelegate {
+    
+    var currentColorInitialView: UIColor { get set }
+    
     func setNewColorInitialView()
 }
 
@@ -22,12 +25,6 @@ class InitialViewController: UIViewController {
         alpha: 1
     )
     
-    override func viewWillAppear(_ animated: Bool) {
-        super .viewWillAppear(animated)
-        
-        setNewColorInitialView()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             let fillColorsVC = segue.destination as? FillColorsViewController
@@ -37,12 +34,7 @@ class InitialViewController: UIViewController {
         fillColorsVC.currentColorInitialView = currentColorInitialView
     }
     
-    @IBAction func unwindToInitialVC(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController =
-            unwindSegue.source as? FillColorsViewController
-        currentColorInitialView =
-            sourceViewController?.fillingColorView.backgroundColor ?? .white
-    }
+    @IBAction func unwindToInitialVC(_ unwindSegue: UIStoryboardSegue) {}
     
     @IBAction func goToSecond() {
         performSegue(withIdentifier: "toSecondGegue", sender: "nil")
