@@ -14,6 +14,9 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
     
+    @IBOutlet var sladersCollection: [UISlider]!
+    
+    
     @IBOutlet var redLabel: UILabel!
     @IBOutlet var greenLabel: UILabel!
     @IBOutlet var blueLabel: UILabel!
@@ -90,26 +93,17 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         blueValueTexField.text = String(format: "%.2f", blueSlider.value)
     }
     
-    private func textFieldValueToSlider() {
+    private func textFieldValueToSlider(_ textField: UITextField) {
         guard
-            let redValueString = redValueTexField.text,
-            let greenValueString = greenValueTexField.text,
-            let blueValueString = blueValueTexField.text
+            let textFieldValueToString = textField.text,
+            let textFieldValueToFloat = Float(textFieldValueToString)
         else { return }
         
-        guard
-            let redValueFloat = Float(redValueString),
-            let greenValueFloat = Float(greenValueString),
-            let blueValueFloat = Float(blueValueString)
-        else { return }
-        // проверка на nil иначе обнулить в каждом слайдере значение
-        // убрать извлечение строк
-        // переделать через textField.tag в методе
-        
-        redSlider.value = redValueFloat
-        greenSlider.value = greenValueFloat
-        blueSlider.value = blueValueFloat
-        
+        for slider in sladersCollection {
+            if textField.tag == slider.tag {
+                slider.value = textFieldValueToFloat
+            }
+        }
     }
     
     private func updateSliderValueFromInitialView() {
@@ -120,13 +114,16 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        textFieldValueToSlider()
+        textFieldValueToSlider(textField)
         textField.resignFirstResponder()
         updatefillingColorView()
         
         return true
     }
 }
+
+// проверка на nil иначе обнулить в каждом слайдере значение
+// проставить циклы для слайдеров
 
 
 

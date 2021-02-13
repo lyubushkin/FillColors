@@ -138,14 +138,14 @@
                                             <action selector="sliderAction" destination="BYZ-38-t0r" eventType="valueChanged" id="pYN-nu-MFh"/>
                                         </connections>
                                     </slider>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ccV-Xh-kL6">
+                                    <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ccV-Xh-kL6">
                                         <rect key="frame" x="-2" y="50" width="227.33333333333334" height="31"/>
                                         <color key="minimumTrackTintColor" systemColor="systemGreenColor"/>
                                         <connections>
                                             <action selector="sliderAction" destination="BYZ-38-t0r" eventType="valueChanged" id="bJX-5D-Cko"/>
                                         </connections>
                                     </slider>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jPv-Z9-h8C">
+                                    <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jPv-Z9-h8C">
                                         <rect key="frame" x="-2" y="100" width="227.33333333333334" height="31"/>
                                         <color key="minimumTrackTintColor" systemColor="systemBlueColor"/>
                                         <connections>
@@ -191,6 +191,9 @@
                         <outlet property="redLabel" destination="dfB-V5-jcA" id="vb9-sm-gHB"/>
                         <outlet property="redSlider" destination="4Uy-2s-1uw" id="Gna-p0-MBZ"/>
                         <outlet property="redValueTexField" destination="NIw-uh-aRP" id="SJh-Nf-K2R"/>
+                        <outletCollection property="sladersCollection" destination="4Uy-2s-1uw" collectionClass="NSMutableArray" id="UTB-Mf-v5T"/>
+                        <outletCollection property="sladersCollection" destination="ccV-Xh-kL6" collectionClass="NSMutableArray" id="cQ5-wV-Wr4"/>
+                        <outletCollection property="sladersCollection" destination="jPv-Z9-h8C" collectionClass="NSMutableArray" id="SLR-QH-JCE"/>
                         <segue destination="Q96-zz-x6x" kind="show" identifier="goToInitialViewSegue" id="O17-YX-AuK"/>
                     </connections>
                 </viewController>
