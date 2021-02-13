@@ -6,7 +6,7 @@
 
 import UIKit
 
-class FillColorsViewController: UIViewController {
+class FillColorsViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var fillingColorView: UIView!
     
@@ -17,6 +17,10 @@ class FillColorsViewController: UIViewController {
     @IBOutlet var redLabel: UILabel!
     @IBOutlet var greenLabel: UILabel!
     @IBOutlet var blueLabel: UILabel!
+    
+    @IBOutlet var redValueTexField: UITextField!
+    @IBOutlet var greenValueTexField: UITextField!
+    @IBOutlet var blueValueTexField: UITextField!
     
     var delegate: InitialViewControllerDelegate!
     var currentColorInitialView: UIColor!
@@ -29,6 +33,12 @@ class FillColorsViewController: UIViewController {
         updatefillingColorView()
         updateLabels()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
+        updateTextFields()
+        //setNewColorInitialView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,6 +55,7 @@ class FillColorsViewController: UIViewController {
     @IBAction func sliderAction() {
         updateLabels()
         updatefillingColorView()
+        updateTextFields()
     }
     
     @IBAction func pressedDoneButton() {
@@ -63,6 +74,12 @@ class FillColorsViewController: UIViewController {
         redLabel.text = String(format: "%.2f", redSlider.value)
         greenLabel.text = String(format: "%.2f", greenSlider.value)
         blueLabel.text = String(format: "%.2f", blueSlider.value)
+    }
+    
+    private func updateTextFields() {
+        redValueTexField.text = String(format: "%.2f", redSlider.value)
+        greenValueTexField.text = String(format: "%.2f", greenSlider.value)
+        blueValueTexField.text = String(format: "%.2f", blueSlider.value)
     }
     
     private func updateSliderValueFromInitialView() {
