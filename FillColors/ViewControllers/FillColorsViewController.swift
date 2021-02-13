@@ -36,7 +36,9 @@ class FillColorsViewController: UIViewController {
             let initialVC = segue.destination as? InitialViewController
         else { return }
         
-        initialVC.currentColorInitialView = fillingColorView.backgroundColor
+        initialVC.currentColorInitialView =
+            fillingColorView.backgroundColor ?? .white
+        
         delegate.setNewColorInitialView()
     }
     

@@ -15,13 +15,17 @@ class InitialViewController: UIViewController {
     
     @IBOutlet var initialView: UIView!
     
-    var currentColorInitialView: UIColor!
+    var currentColorInitialView = UIColor(
+        red: 1,
+        green: 1,
+        blue: 1,
+        alpha: 1
+    )
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
         
-        currentColorInitialView = initialView.backgroundColor
-  
+        setNewColorInitialView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -36,18 +40,11 @@ class InitialViewController: UIViewController {
     @IBAction func goToSecond() {
         performSegue(withIdentifier: "toSecondGegue", sender: "nil")
     }
-    
-    private func testChangeColorView() {
-        initialView.backgroundColor = .red
-    }
 }
 
 extension InitialViewController: InitialViewControllerDelegate {
     func setNewColorInitialView() {
-        print("welcome home \(currentColorInitialView.greenValue)")
-        print("metod is working")
-        //initialView.backgroundColor = currentColorInitialView
-        super.view.backgroundColor = currentColorInitialView
+        initialView.backgroundColor = currentColorInitialView
     }
 }
 
