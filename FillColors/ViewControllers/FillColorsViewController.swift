@@ -93,23 +93,55 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         blueValueTexField.text = String(format: "%.2f", blueSlider.value)
     }
     
-    private func textFieldValueToSlider(_ textField: UITextField) {
-        guard
-            let textFieldValueToString = textField.text,
-            let textFieldValueToFloat = Float(textFieldValueToString)
-        else { return }
-        
-        for slider in sladersCollection {
-            if textField.tag == slider.tag {
-                slider.value = textFieldValueToFloat
-            }
-        }
-    }
-    
     private func updateSliderValueFromInitialView() {
         redSlider.value = Float(currentColorInitialView.redValue)
         greenSlider.value = Float(currentColorInitialView.greenValue)
         blueSlider.value = Float(currentColorInitialView.blueValue)
+    }
+    
+    private func textFieldValueToSlider(_ textField: UITextField) {
+        guard
+            let textFieldValueToString = textField.text
+        else { return }
+        
+        guard
+            let textFieldValueToFloat = Float(textFieldValueToString)
+        else {
+            alertTextFieldValue()
+            textField.text = nil
+            
+            return
+        }
+        
+        if checkValueFromTextField(textFieldValueToFloat, textField) {
+            for slider in sladersCollection {
+                if textField.tag == slider.tag {
+                    slider.value = textFieldValueToFloat
+                }
+            }
+        }
+    }
+    
+    private func checkValueFromTextField(_ value: Float, _ textField: UITextField) -> Bool {
+        
+        if value >= 0 && value <= 1 { return true }
+        
+        alertTextFieldValue()
+        textField.text = nil
+       
+        return false
+    }
+    
+    private func alertTextFieldValue() {
+        let alert = UIAlertController(title: "Только цифры от 0 до 1",
+                                      message: "Повторите ввод",
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК",
+                                     style: .default,
+                                     handler: nil)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -117,13 +149,11 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         textFieldValueToSlider(textField)
         textField.resignFirstResponder()
         updatefillingColorView()
+        updateLabels()
         
         return true
     }
 }
-
-// проверка на nil иначе обнулить в каждом слайдере значение
-// проставить циклы для слайдеров
 
 
 
