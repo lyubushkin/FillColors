@@ -32,13 +32,16 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         updateSliderValueFromInitialView()
         updatefillingColorView()
         updateLabels()
+        
+        redValueTexField.delegate = self
+        greenValueTexField.delegate = self
+        blueValueTexField.delegate = self
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
         updateTextFields()
-        //setNewColorInitialView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,6 +53,11 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
             fillingColorView.backgroundColor ?? .white
         
         delegate.setNewColorInitialView()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     @IBAction func sliderAction() {
@@ -82,10 +90,41 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         blueValueTexField.text = String(format: "%.2f", blueSlider.value)
     }
     
+    private func textFieldValueToSlider() {
+        guard
+            let redValueString = redValueTexField.text,
+            let greenValueString = greenValueTexField.text,
+            let blueValueString = blueValueTexField.text
+        else { return }
+        
+        guard
+            let redValueFloat = Float(redValueString),
+            let greenValueFloat = Float(greenValueString),
+            let blueValueFloat = Float(blueValueString)
+        else { return }
+        // проверка на nil иначе обнулить в каждом слайдере значение
+        // убрать извлечение строк
+        // переделать через textField.tag в методе
+        
+        redSlider.value = redValueFloat
+        greenSlider.value = greenValueFloat
+        blueSlider.value = blueValueFloat
+        
+    }
+    
     private func updateSliderValueFromInitialView() {
         redSlider.value = Float(currentColorInitialView.redValue)
         greenSlider.value = Float(currentColorInitialView.greenValue)
         blueSlider.value = Float(currentColorInitialView.blueValue)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textFieldValueToSlider()
+        textField.resignFirstResponder()
+        updatefillingColorView()
+        
+        return true
     }
 }
 
