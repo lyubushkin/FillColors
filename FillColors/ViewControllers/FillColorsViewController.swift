@@ -16,7 +16,6 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var sladersCollection: [UISlider]!
     
-    
     @IBOutlet var redLabel: UILabel!
     @IBOutlet var greenLabel: UILabel!
     @IBOutlet var blueLabel: UILabel!
@@ -30,6 +29,7 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fillingColorView.layer.cornerRadius = 20
         
         updateSliderValueFromInitialView()
@@ -39,23 +39,11 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         redValueTexField.delegate = self
         greenValueTexField.delegate = self
         blueValueTexField.delegate = self
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
         updateTextFields()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            let initialVC = segue.destination as? InitialViewController
-        else { return }
-        
-        initialVC.currentColorInitialView =
-            fillingColorView.backgroundColor ?? .white
-        
-        delegate.setNewColorInitialView()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,8 +58,9 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func pressedDoneButton() {
-        performSegue(withIdentifier: "goToInitialViewSegue", sender: nil)
+        delegate.setNewColorInitialView()
     }
+    
     private func updatefillingColorView() {
         fillingColorView.backgroundColor = UIColor(
             red: CGFloat(redSlider.value),
