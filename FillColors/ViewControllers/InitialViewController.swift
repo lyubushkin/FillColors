@@ -34,8 +34,6 @@ class InitialViewController: UIViewController {
         fillColorsVC.currentColorInitialView = currentColorInitialView
     }
     
-    @IBAction func unwindToInitialVC(_ unwindSegue: UIStoryboardSegue) {}
-    
     @IBAction func goToSecond() {
         performSegue(withIdentifier: "toSecondGegue", sender: "nil")
     }

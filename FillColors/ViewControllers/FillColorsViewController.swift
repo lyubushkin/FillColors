@@ -60,6 +60,7 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     @IBAction func pressedDoneButton() {
         delegate.currentColorInitialView = fillingColorView.backgroundColor ?? .white
         delegate.setNewColorInitialView()
+        self.dismiss(animated: true)
     }
     
     private func updatefillingColorView() {
