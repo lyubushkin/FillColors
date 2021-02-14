@@ -37,7 +37,7 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         updateLabels()
         
         customTextFields()
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,11 +139,13 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
         greenValueTexField.delegate = self
         blueValueTexField.delegate = self
         
-        redValueTexField.keyboardType = UIKeyboardType.decimalPad
-        greenValueTexField.keyboardType = UIKeyboardType.decimalPad
-        blueValueTexField.keyboardType = UIKeyboardType.decimalPad
+        redValueTexField.autocorrectionType = .no
+        greenValueTexField.autocorrectionType = .no
+        blueValueTexField.autocorrectionType = .no
         
-        redValueTexField.addDoneButtonOnKeyboard()
+//        redValueTexField.keyboardType = UIKeyboardType.decimalPad
+//        greenValueTexField.keyboardType = UIKeyboardType.decimalPad
+//        blueValueTexField.keyboardType = UIKeyboardType.decimalPad
     
     }
     
@@ -158,50 +160,48 @@ class FillColorsViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension UITextField {
-    
-    @IBInspectable var doneAccesory: Bool {
-        get {
-            return self.doneAccesory
-        }
-        
-        set (hasDone) {
-            if hasDone {
-                addDoneButtonOnKeyboard()
-            }
-        }
-    }
-    
-    func addDoneButtonOnKeyboard() {
-        let doneToolbar: UIToolbar = UIToolbar(
-            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
-        )
-        
-        doneToolbar.barStyle = .default
-        
-        let flexSpace = UIBarButtonItem(
-            barButtonSystemItem: .flexibleSpace, target: nil, action: nil
-        )
-        let done: UIBarButtonItem = UIBarButtonItem(
-            title: "Done",
-            style: .done,
-            target: self,
-            action: #selector(self.doneButtonAction)
-        )
-        
-        let items = [flexSpace, done]
-        doneToolbar.items = items
-        doneToolbar.sizeToFit()
-        
-        self.inputAccessoryView = doneToolbar
-    }
-    
-    @objc func doneButtonAction() {
-        
-        print("hello word \(self.tag)")
-
-        self.resignFirstResponder()
-    }
-}
+//extension UITextField {
+//
+//    @IBInspectable var doneAccesory: Bool {
+//        get {
+//            return self.doneAccesory
+//        }
+//
+//        set (hasDone) {
+//            if hasDone {
+//                addDoneButtonOnKeyboard()
+//            }
+//        }
+//    }
+//
+//    func addDoneButtonOnKeyboard() {
+//        let doneToolbar: UIToolbar = UIToolbar(
+//            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
+//        )
+//
+//        doneToolbar.barStyle = .default
+//
+//        let flexSpace = UIBarButtonItem(
+//            barButtonSystemItem: .flexibleSpace, target: nil, action: nil
+//        )
+//        let done: UIBarButtonItem = UIBarButtonItem(
+//            title: "Done",
+//            style: .done,
+//            target: self,
+//            action: #selector(self.doneButtonAction)
+//        )
+//
+//        doneToolbar.items = [flexSpace, done]
+//        doneToolbar.sizeToFit()
+//
+//        self.inputAccessoryView = doneToolbar
+//    }
+//
+//    @objc func doneButtonAction() {
+//
+//        self.resignFirstResponder()
+//
+//    }
+//}
 
 
